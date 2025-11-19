@@ -151,7 +151,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
                         // Login to Docker Hub
-                        sh "docker login -u harishnshetty -p ${dockerpwd}"
+                        sh "docker login -u sampathkarra -p ${dockerpwd}"
 
                         // Run Docker Scout CVE scan and save output
                         // sh "docker-scout cves flipkart --format json > image-cves-report.json"
@@ -203,14 +203,14 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
-                        sh "docker login -u harishnshetty -p ${dockerpwd}"
+                        sh "docker login -u sampathkarra -p ${dockerpwd}"
                         sh "docker tag flipkart ${env.IMAGE_TAG}"
                         sh "docker push ${env.IMAGE_TAG}"
 
                         // Also push latest
-                        sh "docker tag flipkart harishnshetty/flipkart:latest"
+                        sh "docker tag flipkart sampathkarra/flipkart:latest"
                         
-                        sh "docker push harishnshetty/flipkart:latest"
+                        sh "docker push sampathkarra/flipkart:latest"
                         sh "docker logout"
                     }
                 }
